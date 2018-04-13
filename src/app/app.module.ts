@@ -22,12 +22,15 @@ import { ProductComponent } from './components/products/product/product.componen
 //services
 import { ProductService } from './services/product.service';
 
+//Importar HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     ProductListComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { ProductService } from './services/product.service';
     AngularFireDatabaseModule,
     FormsModule,
     ToastrModule.forRoot(), //forRoot() hace que se ejecute en toda la aplicacion
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule //Para peticiones http
   ],
   providers: [
     ProductService

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../models/product';
 import { ToastrService } from 'ngx-toastr';
+import { HttpServicesService } from '../../../services/http-services.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,10 +14,11 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductListComponent implements OnInit {
 
   productList: Product[];
+  public httpService: HttpServicesService;
 
   constructor(
     private productService: ProductService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {   }
 
 
@@ -30,7 +32,9 @@ export class ProductListComponent implements OnInit {
           x["$key"] = element.key;
           this.productList.push(x as Product);
         })
-      })
+      });
+
+      //this.httpService.getProduct();
   }
 
   onEdit(product: Product){
