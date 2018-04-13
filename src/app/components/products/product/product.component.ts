@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts();
-    //this.resetForm();
+    this.resetForm();
   }
 
   onSubmit(productForm: NgForm){
@@ -23,7 +23,7 @@ export class ProductComponent implements OnInit {
     this.resetForm(productForm);
   }
 
-  resetForm(productForm: NgForm){
+  resetForm(productForm?: NgForm){
     if(productForm != null){
       productForm.reset();
       this.productService.selectedProduct = new Product();
