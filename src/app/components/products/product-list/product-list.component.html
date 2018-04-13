@@ -7,9 +7,12 @@
           <td>{{product.name}}</td>
           <td>{{product.category}}</td>
           <td>
-            <button>
-              Edit
-            </button>
+            <a class="btn btn-secondary text-white" (click)="onEdit(product)">
+              <i class="far fa-edit"></i>
+            </a>
+            <a class="btn btn-danger text-white" (click)="onDelete(product.$key)">
+              <i class="fas fa-trash-alt"></i>
+            </a>
           </td>
         </tr>
       </tbody>
