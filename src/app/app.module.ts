@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms'
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ToastrModule } from 'ngx-toastr'
+
 
 import { AppComponent } from './app.component';
 
@@ -30,7 +33,9 @@ import { ProductService } from './services/product.service';
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(), //forRoot() hace que se ejecute en toda la aplicacion
+    BrowserAnimationsModule
   ],
   providers: [
     ProductService

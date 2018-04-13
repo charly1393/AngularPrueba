@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 //Service
 import { ProductService } from '../../../services/product.service'
-import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+//Product Class
 import { Product } from '../../../models/product';
 
 @Component({
@@ -11,7 +15,10 @@ import { Product } from '../../../models/product';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.productService.getProducts();
@@ -25,6 +32,7 @@ export class ProductComponent implements OnInit {
       this.productService.updateProduct(productForm.value);
     }
     this.resetForm(productForm);
+    this.toastr.success('Successful Operation', 'Successful Operation');
   }
 
   resetForm(productForm?: NgForm){
