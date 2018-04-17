@@ -24,7 +24,7 @@ import { ProductService } from './services/product.service';
 
 //Importar HttpClientModule
 import { HttpClientModule } from '@angular/common/http';
-import { HttpListComponent } from './components/products/http-list/http-list.component';
+import { HttpListComponent } from './components/http-list/http-list.component';
 
 @NgModule({
   declarations: [
