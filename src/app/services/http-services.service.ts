@@ -19,7 +19,13 @@ export class HttpServicesService {
   configUrl = '192.168.0.1';
 
   public getPosts() {
-    console.log(this.http.get('http://192.168.1.65:8084/product/new?name=nombre&category=book&location=esp&price=20'));
+    //console.log(this.http.get('http://192.168.1.68:8084/product/new?name=nombre&category=book&location=esp&price=20'));
+
+    this.http.get<Observable<any>>
+    ('http://192.168.1.68:8084/product/new?name=nombre&category=book&location=esp&price=20').subscribe(x => {
+      console.log("Longitud " + x.subscribe);
+    },
+    );
 
     this.http.get<Post[]>
       ('https://jsonplaceholder.typicode.com/posts').subscribe(x => {
@@ -64,12 +70,12 @@ export class HttpServicesService {
 
   httpPostExample() {
 
-    this.http.post("http://192.168.1.65:8084/product",
+    this.http.post("http://192.168.1.68:8084/product/new/",
         {
-            "name": "prueba",
-            "category": "prueba2",
-            "location": "prueba3",
-            "price": 23
+            name: 'prueba',
+            category: 'prueba2',
+            location: 'prueba3',
+            price: 23
         })
         .subscribe(
             (val) => {
