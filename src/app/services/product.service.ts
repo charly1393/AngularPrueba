@@ -26,7 +26,7 @@ export class ProductService {
   }
 
   updateProduct(product: Product){
-    this.productList.update(product.$key,{ //Con esto busca el producto por la clave
+    this.productList.update(product.id,{ //Con esto busca el producto por la clave
       name: product.name,
       category: product.category,
       location: product.location,

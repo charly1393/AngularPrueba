@@ -8,38 +8,36 @@ import { Product } from '../models/product'
 @Injectable()
 export class HttpServicesService {
 
-  public posts: Post[];
+  //Variables
   public products: Product[];
-  public peticion: Peticion[];
 
+  /**
+   * Constructor del servicio
+   * 
+   * @param http recibe http como parametro tipo de objeto HttpClient 
+   * @param toastr recibe toastr como parametro tipo de objeto ToastrService
+   */
   constructor(
     public http: HttpClient, private toastr: ToastrService
   ) { }
 
-  configUrl = '192.168.0.1';
 
-  public getPosts() {
-    //console.log(this.http.get('http://192.168.1.68:8084/product/new?name=nombre&category=book&location=esp&price=20'));
+  /**
+   * Metodo httpGetProducts() te devuelve todos los productos en la base de datos mediante una peticion
+   * GET y los añade en la tabla
+   */
+  httpGetProducts() {
 
-    this.http.get<Observable<any>>
-    ('http://192.168.1.68:8084/product/new?name=nombre&category=book&location=esp&price=20').subscribe(x => {
-      console.log("Longitud " + x.subscribe);
-    },
-    );
+    try {
+      this.http.get<Product[]>
+        ('http://192.168.1.68:8084/product/getall').subscribe(x => {
 
-    this.http.get<Post[]>
-      ('https://jsonplaceholder.typicode.com/posts').subscribe(x => {
-        this.posts = x;
-        //console.log('Number of posts: ' + this.posts.length);
+          this.products = x;
+          console.log(JSON.stringify("Products length: " + this.products.length));
 
-        var i = 1;
+          for (let index = 0; index < this.products.length; index++) {
 
-        for (let index = 0; index < this.posts.length; index++) {
-
-          var table: HTMLTableElement = <HTMLTableElement>document.getElementById("tablecontent");
-
-          
-          if (true/*table.rows.length <= i*/) {
+            var table: HTMLTableElement = <HTMLTableElement>document.getElementById("tablecontent");
 
             var row = table.insertRow(table.rows.length);
 
@@ -47,60 +45,83 @@ export class HttpServicesService {
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
 
-            cell1.innerHTML = "" + this.posts[index].id;
-            cell2.innerHTML = this.posts[index].title;
-            cell3.innerHTML = this.posts[index].body;
-            i++;
+            cell1.innerHTML = this.products[index].name;
+            cell2.innerHTML = this.products[index].category;
+            cell3.innerHTML = "" + this.products[index].id;
+
           }
 
-          //console.log(table.innerHTML);
-        }
+        });
 
-        if (this.posts != null) {
-          this.toastr.success('Successfull Operation', 'Successfull Operation');
-        } else if(table.rows.length>100) {
-          this.toastr.error('Failed Operation', 'Failed Operation');
-        }
+      this.toastr.success('Successfull Operation', 'Successfull Operation');
 
-      }
-
-      );
+    } catch (e) {
+      console.log(e);
+      this.toastr.error('Failure Operation', 'Failure Operation');
+    }
 
   }
 
+  /**
+   * Metodo httpPostExample() inserta en la bbdd un objeto Product mediante una peticion
+   * POSt, pasando sus atributos como parametros
+   */
   httpPostExample() {
 
-    this.http.post("http://192.168.1.68:8084/product/new/",
-        {
-            name: 'prueba',
-            category: 'prueba2',
-            location: 'prueba3',
-            price: 23
-        })
-        .subscribe(
-            (val) => {
-                console.log("POST call successful value returned in body", 
-                            val);
-            },
-            response => {
-                console.log("POST call in error", response);
-            },
-            () => {
-                console.log("The POST observable is now completed.");
-            });
-    }
+    this.http.post("http://192.168.1.68:8084/product/new",
+      {
+        name: 'prueba',
+        category: 'prueba2',
+        location: 'prueba3',
+        price: 23
+      })
+      .subscribe(
+        (val) => {
+          console.log("POST call successful value returned in body",
+            val);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
+
+  }
+
+  httpPutExample() {
+
+    this.http.put("http://192.168.1.68:8084/product/new",
+      {
+        name: 'prueba',
+        category: 'prueba2',
+        location: 'prueba3',
+        price: 23
+      })
+      .subscribe(
+        (val) => {
+          console.log("POST call successful value returned in body",
+            val);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
+
+  }
+
+  httpDeleteExample() {
+    /* this.http.delete("",{
+      name: 'prueba',
+      category: 'prueba2',
+      location: 'prueba3',
+      price: 23
+    }); */
+  }
 
 }
 
 
 
-interface Post {
-  userId: number,
-  id: number,
-  title: string,
-  body: string,
-}
-
-interface Peticion {
-  content: string
-}
