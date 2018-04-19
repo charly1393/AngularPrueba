@@ -30,7 +30,7 @@ export class HttpServicesService {
 
     try {
       this.http.get<Product[]>
-        ('http://192.168.1.68:8084/product/getall').subscribe(x => {
+        ('http://192.168.1.68:8086/product/getall').subscribe(x => {
 
           this.products = x;
           console.log(JSON.stringify("Products length: " + this.products.length));
@@ -68,30 +68,34 @@ export class HttpServicesService {
    */
   httpPostExample() {
 
-    this.http.post("http://192.168.1.68:8084/product/new",
+    this.http.post("http://192.168.1.68:8086/product/new",
       {
-        name: 'prueba',
-        category: 'prueba2',
-        location: 'prueba3',
+        name: 'Carlos2',
+        category: 'prueba',
+        location: 'dialogo',
         price: 23
       })
       .subscribe(
         (val) => {
           console.log("POST call successful value returned in body",
             val);
+          this.httpGetProducts();
         },
         response => {
           console.log("POST call in error", response);
         },
         () => {
           console.log("The POST observable is now completed.");
-        });
+        }
+      );
+
+      
 
   }
 
   httpPutExample() {
 
-    this.http.put("http://192.168.1.68:8084/product/new",
+    this.http.put("http://192.168.1.68:8086/product/new",
       {
         name: 'prueba',
         category: 'prueba2',

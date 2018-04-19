@@ -16,9 +16,9 @@ export class AppComponent {
 
   getPosts() {
       this.httpServices = new HttpServicesService(this.http, this.toastr);
-      this.httpServices.httpGetProducts();
-      //this.httpServices.getPosts();
-      this.httpServices.httpPutExample();
+      this.httpServices.httpPostExample();
+      //this.httpServices.httpGetProducts();
+      //this.httpServices.httpPutExample();
   }
 
   title = 'app';
