@@ -10,6 +10,7 @@ export class HttpServicesService {
 
   //Variables
   public products: Product[];
+  product: Product;
 
   /**
    * Constructor del servicio
@@ -30,10 +31,10 @@ export class HttpServicesService {
 
     try {
       this.http.get<Product[]>
-        ('http://192.168.1.68:8086/product/getall').subscribe(x => {
+        ('http://192.168.1.68:8087/product/getall').subscribe(x => {
 
           this.products = x;
-          console.log(JSON.stringify("Products length: " + this.products.length));
+          console.log("Products length: " + this.products.length);
 
           for (let index = 0; index < this.products.length; index++) {
 
@@ -68,12 +69,18 @@ export class HttpServicesService {
    */
   httpPostExample() {
 
-    this.http.post("http://192.168.1.68:8086/product/new",
+    this.product = new Product();
+    this.product.name = 'Carlos3';
+    this.product.category = 'prueba';
+    this.product.location = 'dialogo';
+    this.product.price = 13;
+
+    this.http.post("http://192.168.1.68:8087/product/new",
       {
-        name: 'Carlos2',
-        category: 'prueba',
-        location: 'dialogo',
-        price: 23
+        name: this.product.name,
+        category: this.product.category,
+        location: this.product.location,
+        price: this.product.price
       })
       .subscribe(
         (val) => {
@@ -95,7 +102,7 @@ export class HttpServicesService {
 
   httpPutExample() {
 
-    this.http.put("http://192.168.1.68:8086/product/new",
+    this.http.put("http://192.168.1.68:8087/product/new",
       {
         name: 'prueba',
         category: 'prueba2',

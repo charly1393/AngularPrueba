@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpServicesService } from '../app/services/http-services.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-inicial',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
