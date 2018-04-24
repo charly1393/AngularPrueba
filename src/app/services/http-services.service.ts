@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from '@firebase/util';
 import { ToastrService } from 'ngx-toastr';
 import { HttpListComponent } from '../components/http-list/http-list.component';
@@ -26,6 +26,7 @@ export class HttpServicesService {
   /**
    * Metodo httpGetProducts() te devuelve todos los productos en la base de datos mediante una peticion
    * GET y los añade en la tabla
+   * 
    */
   httpGetProducts() {
 
@@ -95,9 +96,6 @@ export class HttpServicesService {
           console.log("The POST observable is now completed.");
         }
       );
-
-      
-
   }
 
   httpPutExample() {
